@@ -6,16 +6,21 @@ cny = 6.40
 mxn = 20.26
 usd = 1
 start_Currency = "usd"
+requested_Currency = "usd"
 currencyCheck = ["usd","mxn","cny","jpy","eur"]
-start_Amount = "usd"
+start_Amount = 0.00
 converted = 0.00
 tracker = 0
 
 status = True
 
+def exitRequest(input):
+    if ( input == "stop" ):
+            exit()
+
 def converter(currency):
     global converted
-    status = True
+    global status
     if ( currency == "stop" ) :
         exit()
 
@@ -35,41 +40,49 @@ def converter(currency):
         converted = round(start_Amount * usd,2)
         status = False
     else:
-        print("That's not a valid option")
+        status = True
 
 
 print("Welcome to my Currency Converter! Follow the prompts and then please type stop when you're done")
-time.sleep(2)
-
+time.sleep(1)
 
 while status:
+    #Checking to see if valid option
+    #Value starts off Valid, will always run once
     if start_Currency in currencyCheck:
-        start_Currency = input("What is the currency you're using now?\n").lower()
-        if ( start_Currency == "stop" ):
-            exit()
+        start_Currency = input("What is the currency you're using now?\n").lower() #Force lower to for comparisons
 
-        start_Amount = float(input("Enter the amount of money you wish to convert:\n"))
-        #runs converter function to convert current currency
-        converter(start_Currency)
-        #If option is valid we want to break
-        status = False
+        #Check for exit 
+        exitRequest(start_Currency)
+
     else:
-        print("Please enter a Valid option.")
-        #If Option isn't valid we want to loop
-        status = True
+        start_Currency = input("That's not a valid option, Please enter a valid option (USD, EUR, JPY, CNY, MXN)\n").lower()
+
+        #Check for exit
+        exitRequest(start_Currency)
+
+        converter(start_Currency)
+
+start_Amount = float(input("Enter the amount of money you wish to convert:\n"))
+
+#Check for exit 
+exitRequest(start_Currency)
+
+#runs converter function to convert current currency
+converter(start_Currency)
 
 status = True
 time.sleep(1)
 
-while status and tracker == 0:
-    if start_Currency in currencyCheck:
+while status:
+    if requested_Currency in currencyCheck:
         requested_Currency = input("Which currency do you wish to convert to?(USD, EUR, JPY, CNY, MXN)\n").lower()
         converter(requested_Currency)
-        status = False
     else:
-        print("Please enter a Valid option.")
+        requested_Currency = input("That's not a valid option, Please enter a valid option (USD, EUR, JPY, CNY, MXN)\n").lower()
+        converter(requested_Currency)
 
-converter(requested_Currency)
+#converter(requested_Currency)
 
-print("Start : " + start_Currency + " : " + str(start_Amount))
-print("End : " + requested_Currency + " : " + str(converted)) 
+print("Start : " + start_Currency.upper() + " : " + str(start_Amount))
+print("End : " + requested_Currency.upper() + " : " + str(converted)) 
