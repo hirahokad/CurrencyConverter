@@ -1,10 +1,10 @@
 import time
 
-eur = 0.83
-jpy = 110.478
-cny = 6.40
-mxn = 20.26
-usd = 1
+#eur = 0.83
+#jpy = 110.478
+#cny = 6.40
+#mxn = 20.26
+#usd = 1
 start_Currency = "usd"
 requested_Currency = "usd"
 currencyCheck = ["usd","mxn","cny","jpy","eur"]
@@ -14,6 +14,7 @@ tracker = 0
 
 status = True
 
+#check for exit flag
 def exitRequest(input):
     if ( input == "stop" ):
             exit()
@@ -43,30 +44,44 @@ def converter(currency):
         status = True
 
 
+
+def usdConverter(current_Currency,currency,amount):
+    global converted
+    global status
+    eur = 1.19
+    jpy = .0090
+    cny = 6.40
+    mxn = 20.26
+    usd = 1
+
+    if current_Currency == "eur":
+        converted = round(start_Amount * 1.19,2)
+
+
+
+
+
+
 print("Welcome to my Currency Converter! Follow the prompts and then please type stop when you're done")
 time.sleep(1)
 
+#Parameter input
 while status:
-    #Checking to see if valid option
-    #Value starts off Valid, will always run once
-    if start_Currency in currencyCheck:
-        start_Currency = input("What is the currency you're using now?\n").lower() #Force lower to for comparisons
+    #Checking to see if valid option, value starts off Valid, will always run once
+    start_Currency = input("What is the currency you're using now?\n").lower() #Force lower to for comparisons
+    exitRequest(start_Currency)
 
-        #Check for exit 
-        exitRequest(start_Currency)
-
-    else:
+    while start_Currency not in currencyCheck:
         start_Currency = input("That's not a valid option, Please enter a valid option (USD, EUR, JPY, CNY, MXN)\n").lower()
-
-        #Check for exit
         exitRequest(start_Currency)
-
+    else:
         converter(start_Currency)
 
-start_Amount = float(input("Enter the amount of money you wish to convert:\n"))
 
-#Check for exit 
-exitRequest(start_Currency)
+
+#We need a check for valid floats - TASK!
+start_Amount = float(input("Enter the amount of money you wish to convert:\n"))
+exitRequest(start_Amount)
 
 #runs converter function to convert current currency
 converter(start_Currency)
