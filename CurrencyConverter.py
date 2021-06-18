@@ -1,13 +1,14 @@
 import time
 
-#eur = 0.83
-#jpy = 110.478
-#cny = 6.40
-#mxn = 20.26
-#usd = 1
+eur = 0.83
+jpy = 110.478
+cny = 6.40
+mxn = 20.26
+usd = 1
 start_Currency = "usd"
 requested_Currency = "usd"
 currencyCheck = ["usd","mxn","cny","jpy","eur"]
+usdValues = [1,20.26,6.40,110.478,0.83]
 start_Amount = 0.00
 converted = 0.00
 tracker = 0
@@ -48,18 +49,16 @@ def converter(currency):
 def usdConverter(current_Currency,currency,amount):
     global converted
     global status
-    eur = 1.19
-    jpy = .0090
-    cny = 6.40
-    mxn = 20.26
-    usd = 1
+    global currencyCheck
+    global usdValues
 
-    if current_Currency == "eur":
-        converted = round(start_Amount * 1.19,2)
+    #we check where the value is in the array and use that to find the value in the other array
+    for i in currencyCheck:
+        if currency == i:
+            index = currencyCheck.index(i)
+            converted = round(amount * usdValues[index],2)
 
-
-
-
+    
 
 
 print("Welcome to my Currency Converter! Follow the prompts and then please type stop when you're done")
@@ -97,7 +96,7 @@ while status:
         requested_Currency = input("That's not a valid option, Please enter a valid option (USD, EUR, JPY, CNY, MXN)\n").lower()
         converter(requested_Currency)
 
-#converter(requested_Currency)
+usdConverter(start_Currency,requested_Currency,start_Amount)
 
 print("Start : " + start_Currency.upper() + " : " + str(start_Amount))
 print("End : " + requested_Currency.upper() + " : " + str(converted)) 
