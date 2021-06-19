@@ -27,31 +27,6 @@ def inputModule(input):
     else:
         status = False
 
-def converter(currency):
-    global converted
-    global status
-    if ( currency == "stop" ) :
-        exit()
-
-    if ( currency == "eur"):
-        converted = round(start_Amount * eur,2)
-        status = False
-    elif ( currency == "jpy"):
-        converted = round(start_Amount * jpy,2)
-        status = False
-    elif ( currency == "cny"):
-        converted = round(start_Amount * cny,2)
-        status = False
-    elif ( currency == "mxn"):
-        converted = round(start_Amount * mxn,2)
-        status = False
-    elif ( currency == "usd"):
-        converted = round(start_Amount * usd,2)
-        status = False
-    else:
-        status = True
-
-
 
 def usdConverter(current_Currency,currency,amount):
     global converted
@@ -71,7 +46,6 @@ def usdConverter(current_Currency,currency,amount):
 print("Welcome to my Currency Converter! Follow the prompts and then please type stop when you're done")
 time.sleep(1)
 
-#Parameter input
 while status:
     #Checking to see if valid option, value starts off Valid, will always run once
     start_Currency = input("What is the currency you're using now?\n").lower() #Force lower to for comparisons
@@ -84,16 +58,11 @@ status = True
 start_Amount = float(input("Enter the amount of money you wish to convert:\n"))
 exitRequest(start_Amount)
 
-#runs converter function to convert current currency
-
 
 while status:
-    if requested_Currency in currencyCheck:
-        requested_Currency = input("Which currency do you wish to convert to?(USD, EUR, JPY, CNY, MXN)\n").lower()
-        converter(requested_Currency)
-    else:
-        requested_Currency = input("That's not a valid option, Please enter a valid option (USD, EUR, JPY, CNY, MXN)\n").lower()
-        converter(requested_Currency)
+    requested_Currency = input("Which currency do you wish to convert to?(USD, EUR, JPY, CNY, MXN)\n").lower()
+    exitRequest(requested_Currency)
+    inputModule(requested_Currency)
 
 
 #This section will check what the current currency is and route to the appropriate function (We might not need start_Currency in the below function
