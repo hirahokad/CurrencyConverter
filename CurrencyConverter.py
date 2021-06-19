@@ -9,6 +9,11 @@ start_Currency = "usd"
 requested_Currency = "usd"
 currencyCheck = ["usd","mxn","cny","jpy","eur"]
 usdValues = [1,20.26,6.40,110.478,0.83]
+mxnValues = [0.048,1,0.31,5.33,0.041]
+cnyValues = [0.15,3.20,1,17.08,0.13]
+jpyValues = [0.0091,0.19,0.059,1,0.0076]
+eurValues = [1.19,24.53,7.66,130.79,1]
+
 start_Amount = 0.00
 converted = 0.00
 tracker = 0
@@ -38,7 +43,10 @@ def usdConverter(current_Currency,currency,amount):
     for i in currencyCheck:
         if currency == i:
             index = currencyCheck.index(i)
-            converted = round(amount * usdValues[index],2)
+            #can I check for the currency and replace the array with the correct name>?
+            x = currency + "Values"
+            print(x)
+            converted = round(amount * x[index],2)
 
     
 
