@@ -1,4 +1,8 @@
 import time
+from tkinter import *
+
+converterGUI = Tk()
+
 
 start_Currency = ""
 requested_Currency = ""
