@@ -41,7 +41,7 @@ time.sleep(1)
 
 while status:
     #Checking to see if valid option
-    start_Currency = input("What is the currency you're using now?\n").lower() #Force lower to for comparisons
+    start_Currency = input("What is the currency you're using now? (USD, EUR, JPY, CNY, MXN)\n").lower() #Force lower to for comparisons
     exitRequest(start_Currency)
     inputCheck(start_Currency)
 
